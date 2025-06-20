@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Phone, Mail, Calendar, Globe, Languages } from 'lucide-react';
+import sriImg from '../assets/sri-image.jpg';
 
 const About = () => {
   const personalInfo = [
@@ -26,11 +27,12 @@ const About = () => {
             <div className="space-y-8">
               <div className="relative">
                 <div className="w-full max-w-md mx-auto aspect-square bg-gradient-to-br from-batman-gold/20 to-batman-taupe/20 rounded-2xl border border-batman-light-grey/30 dark:border-batman-taupe/30 overflow-hidden">
-                  <img 
+{/*                   <img 
                     src="/src/assets/sri-image.jpg" 
                     alt="Sriram A - About" 
                     className="object-cover sri-img-div"
-                  />
+                  /> */}
+                  <img src={sriImg} alt="..." />
                 </div>
                 <div className="absolute -bottom-4 -right-4 bg-batman-gold text-batman-black px-4 py-2 rounded-lg font-semibold">
                   1+ Years Experience
