@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Download, ArrowDown, Phone } from 'lucide-react';
+import sriImg from '../assets/sri-image.jpg';
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState('');
@@ -56,11 +57,12 @@ const Hero = () => {
             <div className="w-40 h-40 mx-auto mb-6 relative animate-float">
               <div className="w-full h-full bg-gradient-to-br from-batman-gold via-batman-taupe to-batman-gold rounded-full p-1 animate-glow">
                 <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-batman-black">
-                  <img 
+{/*                   <img 
                     src="/src/assets/sri-image.jpg" 
                     alt="Sriram A - Flutter Developer" 
                     className="w-full h-full object-cover"
-                  />
+                  /> */}
+                  <img src={sriImg} alt="..." />
                 </div>
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-batman-gold rounded-full flex items-center justify-center animate-pulse">
