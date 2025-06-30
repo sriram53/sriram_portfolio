@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, Download, ArrowDown, Phone } from 'lucide-react';
 import sriImg from '../assets/sri-image.jpg';
-import resume from '../assets/sriram_new_resume.pdf
+import resume from '../assets/sriram_new_resume.pdf';
 
 const Hero = () => {
   const [currentText, setCurrentText] = useState('');
