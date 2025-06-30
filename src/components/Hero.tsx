@@ -143,11 +143,16 @@ const Hero = () => {
 
             {/* CTA Button */}
             <div className="batmanarrow-div">
-              <span className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-batman-gold to-batman-taupe px-8 py-4 rounded-full font-semibold text-batman-black hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-batman-gold/25">
-                <Download className="w-5 h-5 group-hover:animate-bounce" />
-                <span>Download Resume</span>
-              </span>
-            </div>
+  <a
+    href="src/assets/sriram_new_resume.pdf"
+    download="sriram_new_resume.pdf"
+    className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-batman-gold to-batman-taupe px-8 py-4 rounded-full font-semibold text-batman-black hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-batman-gold/25"
+  >
+    <Download className="w-5 h-5 group-hover:animate-bounce" />
+    <span>Download Resume</span>
+  </a>
+</div>
+
           </div>
         </div>
 
