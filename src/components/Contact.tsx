@@ -1,5 +1,7 @@
+
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send, Github, Linkedin, MessageSquare, User, FileText, Twitter } from 'lucide-react';
+import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,15 +10,64 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [status, setStatus] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // You can integrate with a form service like Formspree, EmailJS, etc.
+    setStatus('Sending...');
+
+    const data = {
+      fullName: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      // Send email via SMTP.js (omit From field)
+      await window.Email.send({
+        Host: "smtp.gmail.com",
+        Username: "sidsriramak@gmail.com",
+        Password: "yquaxdypgbqfvutg",
+        To: "sidsriramak@gmail.com",
+        Subject: formData.subject,
+        Body: `
+          Name: ${formData.name}<br>
+          Email: ${formData.email}<br>
+          Subject: ${formData.subject}<br>
+          Message: ${formData.message}
+        `
+      });
+
+      // Store in Airtable
+      await axios.post(
+        "https://api.airtable.com/v0/YOUR_BASE_ID/Contacts",
+        {
+          fields: {
+            FullName: data.fullName,
+            Email: data.email,
+            Subject: data.subject,
+            Message: data.message,
+            Timestamp: data.timestamp
+          }
+        },
+        {
+          headers: {
+            Authorization: "Bearer patMswcFq0ydKQvlf.27ef8910a856614bde482e79cf0e0f368c31eff01f185d064d783d51bc76d9a9",
+            "Content-Type": "application/json"
+          }
+        }
+      );
+
+      setStatus('Message sent and saved successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      setStatus(`Failed to send message: ${error.message || error}`);
+    }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -56,8 +107,7 @@ const Contact = () => {
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/sriram-a-266938260/',
       color: 'hover:text-batman-gold'
-    }
-    ,
+    },
     {
       icon: Twitter,
       name: 'Twitter',
@@ -221,6 +271,11 @@ const Contact = () => {
                   <span>Send Message</span>
                 </button>
               </form>
+              {status && (
+                <div className={`mt-4 text-center ${status.includes('Failed') ? 'text-red-500' : 'text-green-500'}`}>
+                  {status}
+                </div>
+              )}
             </div>
           </div>
 
@@ -232,6 +287,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <script src="https://smtpjs.com/v3/smtp.js"></script>
     </section>
   );
 };
